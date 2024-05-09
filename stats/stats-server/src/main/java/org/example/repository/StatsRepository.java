@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface StatsRepository extends JpaRepository<Hit, Long>{
+public interface StatsRepository extends JpaRepository<Hit, Long> {
 
     @Query("SELECT new org.example.model.Stats(app, uri, COUNT(DISTINCT ip)) " +
             "FROM Hit " +
