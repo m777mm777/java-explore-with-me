@@ -36,17 +36,6 @@
         </dependency>
     </dependencies>
 
-<!--    <build>-->
-<!--        <plugins>-->
-<!--            <pugin>-->
-<!--                <groupId>org.springframework.boot</groupId>-->
-<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
-<!--                <configuration>-->
-<!--                    <jvmArguments>-Dspring.application.admin.enabled=true</jvmArguments>-->
-<!--                </configuration>-->
-<!--            </pugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
     <build>
     <plugins>
         <plugin>

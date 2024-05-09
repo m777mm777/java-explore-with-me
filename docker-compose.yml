@@ -1,9 +1,9 @@
 version: '3.8'
 services:
-  main-service:
+  ewm-service:
     build: main-service
-    image: main-service
-    container_name: main-service
+    image: ewm-service
+    container_name: ewm-service
     ports:
       - "8080:8080"
 
