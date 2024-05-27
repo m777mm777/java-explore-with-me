@@ -105,7 +105,7 @@ public class EventServicePrivateImpl implements EventService {
             throw new ConflictServerError("Редактировать опубликованные события нельзя");
         }
 
-        if (user.getId() != event.getInitiator().getId()) {
+        if (!user.getId().equals(event.getInitiator().getId())) {
             throw new ConflictServerError("Редактировать может только создатель");
         }
 
@@ -153,7 +153,7 @@ public class EventServicePrivateImpl implements EventService {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event не найден"));
 
-        if (event.getInitiator().getId() != userId) {
+        if (!event.getInitiator().getId().equals(userId)) {
             throw new ConflictServerError("Не является создателем Event");
         }
 
