@@ -7,7 +7,6 @@ import org.example.dto.StatsResponse;
 import org.example.mapper.AllMapper;
 import org.example.model.Hit;
 import org.example.repository.StatsRepository;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -19,7 +18,6 @@ public class StatsServiceImpl implements StatsService {
 
     private final StatsRepository statsRepository;
     private final AllMapper mapper;
-    private static final Sort SORT_HIT_DESC = Sort.by(Sort.Direction.DESC, "id");
 
     @Override
     public HitsResponse create(HitRequest hitRequest) {
@@ -35,6 +33,7 @@ public class StatsServiceImpl implements StatsService {
         } else {
             return mapper.toResponseCollection(statsRepository.findViewStats(start, end, uris));
         }
+
     }
 
 }
