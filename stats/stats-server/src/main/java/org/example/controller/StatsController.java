@@ -8,6 +8,7 @@ import org.example.dto.StatsResponse;
 import org.example.service.StatsService;
 import org.example.validate.StatsValidate;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,14 +23,15 @@ public class StatsController {
     private final StatsValidate statsValidate;
 
     @PostMapping("/hit")
+    @ResponseStatus(HttpStatus.CREATED)
     public HitsResponse create(@Valid @RequestBody HitRequest hitRequest) {
         log.info("Create hitDto {}", hitRequest);
         return statsService.create(hitRequest);
     }
 
     @GetMapping("/stats")
-    public List<StatsResponse> getStats(@RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
-                                        @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
+    public List<StatsResponse> getStats(@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime start,
+                                        @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss") LocalDateTime end,
                                         @RequestParam(required = false) List<String> uris,
                                         @RequestParam(defaultValue = "false") Boolean unique) {
         log.info("GetStats start {} end {} uris {} unique {}", start, end, uris, unique);
