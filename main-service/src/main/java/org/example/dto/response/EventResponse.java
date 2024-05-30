@@ -10,6 +10,7 @@ import org.example.model.Location;
 import org.example.model.User;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -50,4 +51,6 @@ public class EventResponse {
     private String title;
 
     private Long views;
+
+    private List<CommentResponse> commentResponses;
 }

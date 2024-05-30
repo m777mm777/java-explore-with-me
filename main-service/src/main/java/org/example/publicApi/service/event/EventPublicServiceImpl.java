@@ -14,8 +14,11 @@ import org.example.dto.response.EventShortResponse;
 import org.example.enums.State;
 import org.example.exceptions.ResourceNotFoundException;
 import org.example.exceptions.ValidationException;
+import org.example.mapper.CommentMapper;
 import org.example.mapper.EventMapper;
+import org.example.model.Comment;
 import org.example.model.Event;
+import org.example.privateApi.repository.CommentRepository;
 import org.example.publicApi.repository.EventPublicRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,6 +41,8 @@ public class EventPublicServiceImpl implements EventPublicService {
     private final EventPublicRepository eventPublicRepository;
     private final EventMapper eventMapper;
     private final StatsClient statsClient;
+    private final CommentRepository commentRepository;
+    private final CommentMapper commentMapper;
     private final Gson gson;
     private static final Sort SORT_EVENT_DATE_ASC = Sort.by(Sort.Direction.ASC, "eventDate");
     private static final Sort SORT_VIEWS_ASC = Sort.by(Sort.Direction.ASC, "views");
@@ -105,8 +110,8 @@ public class EventPublicServiceImpl implements EventPublicService {
     }
 
     @Override
-    public EventResponse getEvent(Long id, HttpServletRequest httpServletRequest) {
-        Event event = eventPublicRepository.findById(id)
+    public EventResponse getEventById(Long eventId, HttpServletRequest httpServletRequest) {
+        Event event = eventPublicRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event не найден"));
 
         if (!event.getState().equals(State.PUBLISHED)) {
@@ -115,13 +120,18 @@ public class EventPublicServiceImpl implements EventPublicService {
 
         addStatistic(httpServletRequest);
 
-        Map<Long, Long> views = getEventsViews(List.of(id));
+        Map<Long, Long> views = getEventsViews(List.of(eventId));
 
-        event.setViews(views.get(id));
+        event.setViews(views.get(eventId));
 
         eventPublicRepository.save(event);
 
-        return eventMapper.toResponse(event);
+        List<Comment> comments = commentRepository.findAllByEventId(eventId);
+
+        EventResponse eventResponse = eventMapper.toResponse(event);
+        eventResponse.setCommentResponses(commentMapper.toResponseCollection(comments));
+
+        return eventResponse;
     }
 
     private void addStatistic(HttpServletRequest httpServletRequest) {

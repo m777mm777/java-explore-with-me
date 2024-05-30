@@ -5,14 +5,18 @@ import org.example.adminApi.repository.CategoryRepository;
 import org.example.adminApi.repository.EventRepositoryAdmin;
 import org.example.dto.request.EventSearchFilter;
 import org.example.dto.request.UpdateEventAdminRequest;
+import org.example.dto.response.CommentResponse;
 import org.example.dto.response.EventResponse;
 import org.example.enums.State;
 import org.example.exceptions.ConflictServerError;
 import org.example.exceptions.ResourceNotFoundException;
 import org.example.exceptions.ValidationException;
+import org.example.mapper.CommentMapper;
 import org.example.mapper.EventMapper;
 import org.example.model.Category;
+import org.example.model.Comment;
 import org.example.model.Event;
+import org.example.privateApi.repository.CommentRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -23,8 +27,12 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.groupingBy;
+import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +41,8 @@ public class EventServiceImpl implements EventService {
     private final EventRepositoryAdmin eventRepositoryAdmin;
     private final EventMapper eventMapper;
     private final CategoryRepository categoryRepository;
+    private final CommentRepository commentRepository;
+    private final CommentMapper commentMapper;
     private static final Sort SORT_ID_ASC = Sort.by(Sort.Direction.ASC, "id");
 
     @Override
@@ -62,7 +72,12 @@ public class EventServiceImpl implements EventService {
             event.setCategory(category);
         }
 
-        return eventMapper.toResponse(eventRepositoryAdmin.save(event));
+        List<Comment> comments = commentRepository.findAllByEventId(eventId);
+        List<CommentResponse> commentResponses = commentMapper.toResponseCollection(comments);
+
+        EventResponse eventResponse = eventMapper.toResponse(eventRepositoryAdmin.save(event));
+        eventResponse.setCommentResponses(commentResponses);
+        return eventResponse;
     }
 
     @Override
@@ -75,7 +90,7 @@ public class EventServiceImpl implements EventService {
                                          Integer size) {
 
         Pageable page = PageRequest.of(from > 0 ? from / size : 0, size, SORT_ID_ASC);
-
+        List<EventResponse> eventResponses = new ArrayList<>();
         EventSearchFilter eventSearchFilter = new EventSearchFilter();
 
         if (users != null) {
@@ -106,7 +121,24 @@ public class EventServiceImpl implements EventService {
         }
 
         List<Event> events = eventPage.getContent();
-        return eventMapper.toResponseCollection(events);
+
+        Map<Event, List<Comment>> comments = commentRepository.findAllByEventIn(events)
+                .stream()
+                .collect(groupingBy(Comment::getEvent, toList()));
+
+        if (!comments.isEmpty()) {
+
+            for (Event event : events) {
+                EventResponse eventResponse = eventMapper.toResponse(event);
+                eventResponse.setCommentResponses(commentMapper.toResponseCollection(comments.get(event)));
+
+                eventResponses.add(eventResponse);
+            }
+        } else {
+            eventResponses = eventMapper.toResponseCollection(events);
+        }
+
+        return eventResponses;
     }
 
     private List<Specification<Event>> searchFilterToSpecifications(EventSearchFilter eventSearchFilter) {
