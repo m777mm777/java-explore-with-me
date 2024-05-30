@@ -1,0 +1,1712 @@
+{
+	"info": {
+		"_postman_id": "254915b0-29e1-4227-8571-c0dca0d3ef76",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "31464052"
+	},
+	"item": [
+		{
+			"name": "юзер",
+			"item": [
+				{
+					"name": "User create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Has user create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test user 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 1').to.eql(138);",
+									"});",
+									"pm.test(\"Test user 'email' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('email');",
+									"    pm.expect(jsonData.email, '\"email\" must be \"user@user.com\"').to.eql('user@user.com');",
+									"});",
+									"pm.test(\"Test user 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"user\"').to.eql('user');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"user\",\n    \"email\": \"user@user.com\"\n}"
+						},
+						"url": "http://localhost:8080/admin/users"
+					},
+					"response": []
+				},
+				{
+					"name": "User create 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 201\", function () {",
+									"    pm.expect(pm.response.code).to.be.oneOf([200,201]);",
+									"});",
+									"pm.test(\"Has user create response\", function () {",
+									"    pm.response.to.be.withBody;",
+									"    pm.response.to.be.json;",
+									"});",
+									"pm.test(\"Test user 'id' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData.id, '\"id\" must be 2').to.eql(139);",
+									"});",
+									"pm.test(\"Test user 'email' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('email');",
+									"    pm.expect(jsonData.email, '\"email\" must be \"user2@user.com\"').to.eql('user2@user.com');",
+									"});",
+									"pm.test(\"Test user 'name' field\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('name');",
+									"    pm.expect(jsonData.name, '\"name\" must be \"user2\"').to.eql('user2');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"user2\",\n    \"email\": \"user2@user.com\"\n}"
+						},
+						"url": "http://localhost:8080/admin/users"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "категория",
+			"item": [
+				{
+					"name": "category create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"categoryTest\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/admin/categories",
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "event",
+			"item": [
+				{
+					"name": "Event create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(201);  \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"annotation\": \"qqqqqqqqqqqqqqqqqqqqqqq\",\n    \"category\": 121,\n    \"description\": \"qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq\",\n    \"eventDate\": \"2024-05-31 15:00:00\",\n    \"location\": {\n            \"lat\": 1111,\n            \"lon\": 2222\n        },\n    \"paid\": \"false\",\n    \"participantLimit\": 100,\n    \"requestModeration\": \"true\",\n    \"title\": \"rrrrrrrrrrr\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "138",
+									"description": "(Required) id текущего пользователя"
+								}
+							]
+						},
+						"description": "Обратите внимание: дата и время на которые намечено событие не может быть раньше, чем через два часа от текущего момента"
+					},
+					"response": []
+				},
+				{
+					"name": "Event create 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(201);  \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"annotation\": \"ggggggggggggggggggggggggggggggggg\",\n    \"category\": 121,\n    \"description\": \"ggggggggggggggggggggggggggggggggggggggg\",\n    \"eventDate\": \"2024-05-31 15:00:00\",\n    \"location\": {\n            \"lat\": 1111,\n            \"lon\": 2222\n        },\n    \"paid\": \"false\",\n    \"participantLimit\": 100,\n    \"requestModeration\": \"true\",\n    \"title\": \"gggggggggggg\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "139",
+									"description": "(Required) id текущего пользователя"
+								}
+							]
+						},
+						"description": "Обратите внимание: дата и время на которые намечено событие не может быть раньше, чем через два часа от текущего момента"
+					},
+					"response": []
+				},
+				{
+					"name": "Event update status",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(200);  \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stateAction\" : \"PUBLISH_EVENT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/events/:eventId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"events",
+								":eventId"
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "107"
+								}
+							]
+						},
+						"description": "Обратите внимание: дата и время на которые намечено событие не может быть раньше, чем через два часа от текущего момента"
+					},
+					"response": []
+				},
+				{
+					"name": "Event update status event 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(200);  \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"stateAction\" : \"PUBLISH_EVENT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/admin/events/:eventId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"events",
+								":eventId"
+							],
+							"variable": [
+								{
+									"key": "eventId",
+									"value": "108"
+								}
+							]
+						},
+						"description": "Обратите внимание: дата и время на которые намечено событие не может быть раньше, чем через два часа от текущего момента"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comment",
+			"item": [
+				{
+					"name": "Comment create",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"commentTest\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "138"
+								},
+								{
+									"key": "eventId",
+									"value": "107"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment update",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"commentUpdateTest\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments/:commentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "138"
+								},
+								{
+									"key": "eventId",
+									"value": "107"
+								},
+								{
+									"key": "commentId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment create 2",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"commentTest\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "138"
+								},
+								{
+									"key": "eventId",
+									"value": "107"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment creatу 3 удалить",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"commentTest\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "138"
+								},
+								{
+									"key": "eventId",
+									"value": "107"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment delit",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 201 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments/:commentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "138"
+								},
+								{
+									"key": "eventId",
+									"value": "107"
+								},
+								{
+									"key": "commentId",
+									"value": "3"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Event get",
+			"item": [
+				{
+					"name": "Поиск событий с проверкой параметров Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Евент должен быть 2\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.length, 'List length must be 2').to.eql(1);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"коммент должен быть 2\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].commentResponses.length, '\"id\" must be 2').to.eql(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"коммент text должен быть commentUpdateTest\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData[0].commentResponses[0].text, '\"id\" must be 2').to.eql(\"commentUpdateTest\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/admin/events?users=138&states=PUBLISHED&categories=0&rangeStart=2022-01-06%2013%3A30%3A38&rangeEnd=2097-09-06%2013%3A30%3A38&from=0&size=1000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"admin",
+								"events"
+							],
+							"query": [
+								{
+									"key": "users",
+									"value": "138",
+									"description": "список id пользователей, чьи события нужно найти"
+								},
+								{
+									"key": "states",
+									"value": "PUBLISHED",
+									"description": "список состояний в которых находятся искомые события"
+								},
+								{
+									"key": "categories",
+									"value": "0",
+									"description": "список id категорий в которых будет вестись поиск"
+								},
+								{
+									"key": "rangeStart",
+									"value": "2022-01-06%2013%3A30%3A38",
+									"description": "дата и время не раньше которых должно произойти событие"
+								},
+								{
+									"key": "rangeEnd",
+									"value": "2097-09-06%2013%3A30%3A38",
+									"description": "дата и время не позже которых должно произойти событие"
+								},
+								{
+									"key": "from",
+									"value": "0",
+									"description": "количество событий, которые нужно пропустить для формирования текущего набора"
+								},
+								{
+									"key": "size",
+									"value": "1000",
+									"description": "количество событий в наборе"
+								}
+							]
+						},
+						"description": "Эндпоинт возвращает полную информацию обо всех событиях подходящих под переданные условия"
+					},
+					"response": []
+				},
+				{
+					"name": "Проверка работы поля views Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 200 и данные в формате json\", function () {\r",
+									"    pm.response.to.be.ok;    \r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Евент id должен быть 107\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.id, 'id 1').to.eql(107);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"коммент должен быть 2\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.commentResponses.length, '\"id\" must be 2').to.eql(2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"коммент text должен быть commentUpdateTest\", function () {\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"    var jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData.commentResponses[0].text, '\"id\" must be 2').to.eql(\"commentUpdateTest\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/events/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"events",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "107",
+									"description": "(Required) id события"
+								}
+							]
+						},
+						"description": "Обратите внимание:\n- событие должно быть опубликовано\n- информация о событии должна включать в себя количество просмотров и количество подтвержденных запросов\n- информацию о том, что по этому эндпоинту был осуществлен и обработан запрос, нужно сохранить в сервисе статистики"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ошибки",
+			"item": [
+				{
+					"name": "Comment create пустой",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								},
+								{
+									"key": "eventId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment более 2000",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"очень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинный\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								},
+								{
+									"key": "eventId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment create not user",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"Comment\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "999"
+								},
+								{
+									"key": "eventId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment create not event",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 404 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"test\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								},
+								{
+									"key": "eventId",
+									"value": "999"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment update пустой",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments/:commentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								},
+								{
+									"key": "eventId",
+									"value": "1"
+								},
+								{
+									"key": "commentId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment update более 2000",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 400 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"очень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныймочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинныйочень длинный\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments/:commentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								},
+								{
+									"key": "eventId",
+									"value": "1"
+								},
+								{
+									"key": "commentId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment update не создатель",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 409 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"comment\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments/:commentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "2"
+								},
+								{
+									"key": "eventId",
+									"value": "1"
+								},
+								{
+									"key": "commentId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				},
+				{
+					"name": "Comment update не тот евент",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Ответ должен содержать код статуса 409 и данные в формате json\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.be.json;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text\": \"comment\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/users/:userId/events/:eventId/comments/:commentId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								":userId",
+								"events",
+								":eventId",
+								"comments",
+								":commentId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "1"
+								},
+								{
+									"key": "eventId",
+									"value": "2"
+								},
+								{
+									"key": "commentId",
+									"value": "1"
+								}
+							]
+						},
+						"description": "Обратите внимание: имя категории должно быть уникальным"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "1",
+			"value": "1"
+		},
+		{
+			"key": "ids",
+			"value": "}"
+		},
+		{
+			"key": "1,2",
+			"value": "1,2"
+		}
+	]
+}
