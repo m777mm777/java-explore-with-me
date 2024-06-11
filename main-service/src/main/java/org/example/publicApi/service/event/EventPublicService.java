@@ -20,6 +20,6 @@ public interface EventPublicService {
                                           Integer size,
                                           HttpServletRequest httpServletRequest);
 
-    EventResponse getEvent(Long id, HttpServletRequest httpServletRequest);
+    EventResponse getEventById(Long eventId, HttpServletRequest httpServletRequest);
 
 }

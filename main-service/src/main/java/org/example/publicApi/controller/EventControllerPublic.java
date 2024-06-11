@@ -61,6 +61,6 @@ public class EventControllerPublic {
     public EventResponse getEvent(@PathVariable Long id,
                                   HttpServletRequest httpServletRequest) {
         log.info("GetEvent id {}", id);
-        return eventPublicService.getEvent(id, httpServletRequest);
+        return eventPublicService.getEventById(id, httpServletRequest);
     }
 }

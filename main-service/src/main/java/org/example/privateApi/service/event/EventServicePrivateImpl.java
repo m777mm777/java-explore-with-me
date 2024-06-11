@@ -8,8 +8,10 @@ import org.example.dto.response.EventRequestStatusUpdateResult;
 import org.example.enums.Status;
 import org.example.exceptions.ConflictServerError;
 import org.example.exceptions.ValidationException;
+import org.example.mapper.CommentMapper;
 import org.example.mapper.RequestMapper;
-import org.example.model.Request;
+import org.example.model.*;
+import org.example.privateApi.repository.CommentRepository;
 import org.example.privateApi.repository.EventRepository;
 import org.example.adminApi.repository.UserRepository;
 import org.example.dto.request.EventRequest;
@@ -19,9 +21,6 @@ import org.example.dto.response.ParticipationResponse;
 import org.example.enums.State;
 import org.example.exceptions.ResourceNotFoundException;
 import org.example.mapper.EventMapper;
-import org.example.model.Category;
-import org.example.model.Event;
-import org.example.model.User;
 import org.example.privateApi.repository.RequestRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -44,6 +43,8 @@ public class EventServicePrivateImpl implements EventService {
     private final CategoryRepository categoryRepository;
     private final RequestMapper requestMapper;
     private final RequestRepository requestRepository;
+    private final CommentRepository commentRepository;
+    private final CommentMapper commentMapper;
     private static final Sort SORT_ID_ASC = Sort.by(Sort.Direction.ASC, "id");
     private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
@@ -142,7 +143,12 @@ public class EventServicePrivateImpl implements EventService {
         Event event = eventRepository.findById(eventId)
                 .orElseThrow(() -> new ResourceNotFoundException("Event не найден"));
 
-        return eventMapper.toResponse(event);
+        List<Comment> comments = commentRepository.findAllByEventId(eventId);
+
+        EventResponse eventResponse = eventMapper.toResponse(event);
+        eventResponse.setCommentResponses(commentMapper.toResponseCollection(comments));
+
+        return eventResponse;
     }
 
     @Override
